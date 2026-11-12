@@ -63,3 +63,11 @@ Los adaptadores por tipo se mantienen separados del núcleo de vehículos. La di
 7. Pruebas de seguridad, accesibilidad y despliegue.
 
 La información mostrada en la demo **no corresponde a registros reales del usuario**.
+
+## Modelado de datos (propuesta v0.1)
+
+- [Diagrama entidad-relación (Mermaid)](docs/data-model/entity-relationship.md)
+- [Modelo relacional, claves y reglas de integridad](docs/data-model/relational-model.md)
+- [Manual y bitácora del proceso de desarrollo](docs/development-manual.md)
+
+El modelo separa usuarios, vehículos, tipos configurables, atributos, mantenimientos, gastos, documentos y lecturas de distancia. **Es diseño documental:** todavía no se han creado las tablas ni aplicado migraciones.
