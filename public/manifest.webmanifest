@@ -1,0 +1,20 @@
+{
+  "id": "/trackvikol/",
+  "name": "TrackVikol — Gestión integral de tus vehículos",
+  "short_name": "TrackVikol",
+  "description": "Gestiona vehículos, mantenimientos, gastos y recordatorios desde tu móvil.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5F8FD",
+  "theme_color": "#0B1F4B",
+  "icons": [
+    {
+      "src": "./trackvikol-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
