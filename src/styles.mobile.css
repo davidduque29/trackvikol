@@ -23,3 +23,16 @@
 .nav-mobile button svg{width:21px;height:21px}
 }
 @media(min-width:801px){.nav-mobile{display:none}}
+
+
+.maintenance-entry{max-height:90dvh;overflow-y:auto}
+.maintenance-entry .form-grid select,.maintenance-entry .line-entry input{border-radius:8px;border:1px solid #e2e4ed;padding:12px;background:#fdfdff;min-width:0;font:inherit}
+.maintenance-entry .form-grid select{width:100%}
+.maintenance-entry h3{font-size:15px;margin:22px 0 12px;color:#291542}
+.line-entry{display:grid;grid-template-columns:minmax(0,1fr) 125px 36px;gap:8px;margin-bottom:8px}
+.line-entry button{border:0;background:#f5effa;color:#7435db;border-radius:8px}
+.line-entry button:disabled{opacity:.3}
+.estimate-checkbox{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px}
+.entry-total{text-align:right;font-size:18px;font-weight:800;color:#7435db}
+.entry-error{color:#bd283c;font-size:12px}
+@media(max-width:520px){.line-entry{grid-template-columns:minmax(0,1fr) 98px 32px}.maintenance-entry{padding:16px}.maintenance-entry .modal-actions{flex-wrap:wrap}}
