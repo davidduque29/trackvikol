@@ -79,7 +79,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <aside className={`sidebar ${navOpen ? 'sidebar-open' : ''}`}>
-        <div className="brand"><div className="brand-logo"><Gauge size={25} /></div><div><strong>track<span>vikol</span></strong><small>YOUR VEHICLE HUB</small></div><button className="close-mobile" onClick={() => setNavOpen(false)} aria-label="Cerrar menú"><X size={20}/></button></div>
+        <div className="brand"><div className="brand-logo"><img src={`${import.meta.env.BASE_URL}trackvikol-mark.svg`} alt="Símbolo TrackVikol" /></div><div><strong>Track<span>Vikol</span></strong><small>GESTIÓN INTEGRAL DE TUS VEHÍCULOS</small></div><button className="close-mobile" onClick={() => setNavOpen(false)} aria-label="Cerrar menú"><X size={20}/></button></div>
         <div className="workspace"><span className="workspace-avatar">T</span><div><strong>Mi espacio</strong><small>Cuenta personal</small></div><ChevronDown size={15} /></div>
         <div className="nav-caption">ESPACIO DE TRABAJO</div>
         <nav aria-label="Navegación principal">{nav.map((item) => <button key={item.key} onClick={() => go(item.key)} className={`nav-link ${page === item.key ? 'selected' : ''}`}><item.icon size={19} /><span>{item.title}</span>{item.key === 'reminders' && activeReminders.length > 0 && <span className="nav-count">{activeReminders.length}</span>}</button>)}</nav>
