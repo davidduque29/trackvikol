@@ -1,0 +1,25 @@
+/* Native-feeling mobile shell for TrackVikol */
+@media(max-width:800px){
+:root{background:#f8f6ff;color:#241538}
+.app-shell{display:block;background:#f8f6ff;min-height:100dvh}
+.sidebar,.scrim{display:none!important}
+.main{width:100%}
+.topbar{height:calc(64px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 18px 0;background:#25113f;color:white;border:0;position:sticky;top:0;z-index:5}
+.topbar-left{color:#e6d9ff}.topbar-left strong{color:white}
+.topbar-left .menu-button{display:none}.topbar-left>span:first-of-type,.topbar-left .divider{display:none}
+.top-actions .user-avatar{background:#e9d9ff;color:#4b1890}
+.content{padding:20px 16px calc(110px + env(safe-area-inset-bottom));background:#f8f6ff}
+.page-heading h1{font-size:27px;color:#25113f}.page-heading h1 em{color:#7435db}
+.eyebrow,.text-button{color:#7435db}
+.primary-button{background:#7435db;border-color:#7435db;border-radius:14px;min-height:45px}
+.stat-card,.vehicle-card,.panel{border-radius:18px;border:1px solid #eee6f7;box-shadow:0 4px 18px #3a1a6010}
+.stat-card{padding:14px}.stat-card>strong{color:#291542}
+.vehicle-grid{grid-template-columns:1fr}.vehicle-card{padding:16px}.vehicle-illustration{height:100px}
+.bottom-grid{display:grid;grid-template-columns:1fr}
+.demo-banner{border-radius:14px;background:#eee8fc;border-color:#ded1f5}
+.nav-mobile{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;bottom:0;left:0;right:0;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eae0f5;z-index:10;box-shadow:0 -5px 22px #24113d10}
+.nav-mobile button{border:0;background:transparent;color:#81758d;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;padding:5px 0;min-width:0}
+.nav-mobile button.active{color:#7435db;font-weight:800}
+.nav-mobile button svg{width:21px;height:21px}
+}
+@media(min-width:801px){.nav-mobile{display:none}}
