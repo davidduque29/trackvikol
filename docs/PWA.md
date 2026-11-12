@@ -17,7 +17,7 @@
 - Instalación desde HTTPS, icono SVG y ejecución standalone en dispositivos compatibles.
 - La interfaz visitada previamente puede abrir sin conexión, siempre que sus recursos hayan sido almacenados en caché.
 - El registro de mantenimientos usa localStorage; **no hay sincronización, almacenamiento en nube ni notificaciones push**.
-- En iOS puede requerirse icono PNG para presentación óptima; se añadirá como mejora.
+- Se incluye un icono SVG para iOS como alternativa provisional. Los iconos PNG de 180, 192 y 512 píxeles siguen pendientes para máxima compatibilidad.
 - El service worker no intercepta solicitudes de terceros ni mutaciones HTTP.
 - Para probar cambios de despliegue, abrir online y recargar; la caché se renueva por versión.
 
