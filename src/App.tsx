@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Activity, ArrowDownRight, ArrowRight, Bell, Bike, CalendarClock, CarFront, Check, ChevronDown, CircleHelp, ClipboardList, FileText, Gauge, LayoutDashboard, Menu, MoreHorizontal, Plus, Search, Settings2, ShieldCheck, Sparkles, TrendingUp, Wallet, Wrench, X, type LucideIcon } from 'lucide-react';
-import { demoMaintenance, demoReminders, demoVehicles } from './data/demo';
+
 import { MaintenanceEntry } from './components/MaintenanceEntry';
 import { AccountPanel } from './components/AccountPanel';
 import { createCloudMaintenance,createCloudVehicle,getSession,loadCloud,signOut,validSession } from './services/supabase';
@@ -36,22 +36,23 @@ function Empty({ icon: Icon, title, message }: { icon: LucideIcon; title: string
   return <div className="empty"><Icon size={34} /><h3>{title}</h3><p>{message}</p></div>;
 }
 
-const readSaved = <T,>(key:string, fallback:T):T => { try { const value=localStorage.getItem(key); return value ? JSON.parse(value) as T : fallback; } catch { return fallback; } };
+
 export default function App() {
   const [page, setPage] = useState<Page>('dashboard');
   const [cloudUser,setCloudUser]=useState<string|null>(null);
   const [cloudError,setCloudError]=useState('');
   const [cloudBusy,setCloudBusy]=useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>(() => getSession() ? [] : readSaved('trackvikol-vehicles-v1',demoVehicles));
-  const [maintenances, setMaintenances] = useState<MaintenanceRecord[]>(() => getSession() ? [] : readSaved('trackvikol-maintenance-v1',demoMaintenance));
-  const [reminders, setReminders] = useState<Reminder[]>(demoReminders);
-  const [isDemo, setIsDemo] = useState(true);
+  const [authReady,setAuthReady]=useState(false);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [maintenances, setMaintenances] = useState<MaintenanceRecord[]>([]);
+  const [reminders, setReminders] = useState<Reminder[]>([]);
+  const [isDemo, setIsDemo] = useState(false);
   async function syncCloud(){setCloudBusy(true);setCloudError('');try{const session=await validSession();if(!session){setCloudUser(null);return;}const data=await loadCloud();setCloudUser(session.user.email||session.user.id);setVehicles(data.vehicles);setMaintenances(data.maintenances);setIsDemo(false);}catch(e){setCloudError(e instanceof Error?e.message:'No se pudo sincronizar.')}finally{setCloudBusy(false)}}
-  useEffect(()=>{if(getSession())void syncCloud();},[]);
+  useEffect(()=>{void (async()=>{if(getSession())await syncCloud();setAuthReady(true);})();},[]);
   const [showAdd, setShowAdd] = useState(false);
   const [showMaintenance, setShowMaintenance] = useState(false);
-  useEffect(()=>{if(!getSession())localStorage.setItem('trackvikol-vehicles-v1',JSON.stringify(vehicles));},[vehicles]);
-  useEffect(()=>{if(!getSession())localStorage.setItem('trackvikol-maintenance-v1',JSON.stringify(maintenances));},[maintenances]);
+
+
   const [selectedType, setSelectedType] = useState<VehicleType>('car');
   const [draft, setDraft] = useState({ nickname: '', brand: '', model: '', year: '', plate: '', odometer: '' });
   const [search, setSearch] = useState('');
@@ -92,6 +93,8 @@ export default function App() {
   async function saveMaintenance(record:MaintenanceRecord) { if(cloudUser){try{await createCloudMaintenance(record)}catch(e){setCloudError(e instanceof Error?e.message:'Error guardando mantenimiento');return;}}setMaintenances(prev=>[record,...prev]);setShowMaintenance(false);setPage('maintenance'); }
   function go(next: Page) { setPage(next); setNavOpen(false); }
 
+  if (!authReady) return <main className="auth-gate"><p>Comprobando sesión segura…</p></main>;
+  if (!cloudUser) return <main className="auth-gate"><div className="auth-gate-brand"><img src={`${import.meta.env.BASE_URL}trackvikol-mark.svg`} alt="TrackVikol"/><h1>TrackVikol</h1><p>Tu garaje privado, siempre contigo.</p></div>{cloudError && <p role="alert">{cloudError}</p>}<AccountPanel onLogin={syncCloud}/></main>;
   return (
     <div className="app-shell">
       <aside className={`sidebar ${navOpen ? 'sidebar-open' : ''}`}>
